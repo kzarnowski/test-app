@@ -1,5 +1,5 @@
 import { UseFormReturn, Controller} from "react-hook-form";
-import { AddRequestWithProject, Project } from "../types";
+import { RequestWithProject, Project, AddRequest, OtherRequest } from "../types";
 import { Space, Input } from "antd";
 //import { NameInput, DateInput } from '../components/project'
 
@@ -7,7 +7,7 @@ import { Space, Input } from "antd";
 export function ProjectItems({
   useFormData
 }: {
-  useFormData: UseFormReturn<Project> | UseFormReturn<AddRequestWithProject>,
+  useFormData: UseFormReturn<Project> | UseFormReturn<AddRequest & Project> | UseFormReturn<OtherRequest & Project>,
 }) {
   const {
     control,

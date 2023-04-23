@@ -1,11 +1,11 @@
 import { UseFormReturn, useWatch, Controller } from "react-hook-form";
-import { OtherRequest } from "../types";
+import { OtherRequest, Project } from "../types";
 import { Space, Input } from "antd";
 
 export function OtherRequestItems({
   useFormData
 }: {
-  useFormData: UseFormReturn<OtherRequest>
+  useFormData: UseFormReturn<OtherRequest> | UseFormReturn<OtherRequest & Project>
 }) {
   const {
     control,
