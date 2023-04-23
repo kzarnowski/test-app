@@ -1,28 +1,16 @@
-// export type RequestBase = {
-//   date: string
-//   priority: 'high' | 'low'
-// }
-
-// export type AddRequest = RequestBase & {
-//   addField: string
-// }
-
-// export type OtherRequest = RequestBase & {
-//   otherField: string
-// }
+export type RequestBase = {
+  date: string
+  priority: 'high' | 'low'
+}
 
 export type AddRequest = {
-  request: {
-    date: string
-    priority: 'high' | 'low'
+  request: RequestBase & {
     addField: string
   }
 }
 
 export type OtherRequest = {
-  request: {
-    date: string
-    priority: 'high' | 'low'
+  request: RequestBase & {
     otherField: string
   }
 }

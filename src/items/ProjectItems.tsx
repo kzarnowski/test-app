@@ -1,13 +1,13 @@
-import { UseFormReturn, Controller } from "react-hook-form";
-import { Project } from "../types";
+import { UseFormReturn, Controller} from "react-hook-form";
+import { AddRequestWithProject, Project } from "../types";
 import { Space, Input } from "antd";
+//import { NameInput, DateInput } from '../components/project'
+
 
 export function ProjectItems({
-  useFormData,
-  prefix
+  useFormData
 }: {
-  useFormData: UseFormReturn<Project>,
-  prefix?: string
+  useFormData: UseFormReturn<Project> | UseFormReturn<AddRequestWithProject>,
 }) {
   const {
     control,
@@ -19,12 +19,12 @@ export function ProjectItems({
   return (
     <Space direction="vertical" size="large" className="full-width">
       <Controller
-        name={`project.name`}
+        name="project.name"
         control={control}
         render={() => (<Input placeholder="Enter name" />)}
       />
       <Controller
-        name={`project.date`}
+        name="project.date"
         control={control}
         render={() => (<Input placeholder="Enter date" />)}
       />

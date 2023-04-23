@@ -3,11 +3,9 @@ import { OtherRequest } from "../types";
 import { Space, Input } from "antd";
 
 export function OtherRequestItems({
-  useFormData,
-  prefix
+  useFormData
 }: {
-  useFormData: UseFormReturn<OtherRequest>,
-  prefix?: string
+  useFormData: UseFormReturn<OtherRequest>
 }) {
   const {
     control,
