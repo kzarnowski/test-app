@@ -3,37 +3,35 @@ import { AddRequest } from "../types";
 import { Space, Input } from "antd";
 
 export function AddRequestItems({
-useFormData,
-prefix
+  useFormData
 }: {
-useFormData: UseFormReturn<AddRequest>,
-prefix: string
+  useFormData: UseFormReturn<AddRequest>
 }) {
   const {
     control,
     formState: { errors }
   } = useFormData
 
-  const addErrors = errors.addField
+  const addErrors = errors.request?.addField
 
-  const priority = useWatch({ control, name: 'priority' })
+  const priority = useWatch({ control, name: 'request.priority' })
 
   return (
     <Space direction="vertical" size="large" className="full-width">
       <Controller
-        name="date"
+        name="request.date"
         control={control}
         render={() => (<Input placeholder="Enter date" />
         )}
       />
       <Controller
-        name="priority"
+        name="request.priority"
         control={control}
         render={() => (<Input placeholder="Enter priority" />
         )}
       />
       <Controller
-        name="addField"
+        name="request.addField"
         control={control}
         render={() => (<Input placeholder="Enter addField" />
         )}

@@ -3,33 +3,35 @@ import { OtherRequest } from "../types";
 import { Space, Input } from "antd";
 
 export function OtherRequestItems({
-useFormData
+  useFormData,
+  prefix
 }: {
-useFormData: UseFormReturn<OtherRequest>
+  useFormData: UseFormReturn<OtherRequest>,
+  prefix?: string
 }) {
   const {
     control,
     formState: { errors }
   } = useFormData
 
-  const otherErrors = errors.otherField
+  const otherErrors = errors.request?.otherField
 
-  const priority = useWatch({ control, name: 'priority' })
+  const priority = useWatch({ control, name: 'request.priority' })
 
   return (
     <Space direction="vertical" size="large" className="full-width">
       <Controller
-        name="date"
+        name="request.date"
         control={control}
         render={() => (<Input placeholder="Enter date" />)}
       />
       <Controller
-        name="priority"
+        name="request.priority"
         control={control}
         render={() => (<Input placeholder="Enter priority" />)}
       />
       <Controller
-        name="otherField"
+        name="request.otherField"
         control={control}
         render={() => (<Input placeholder="Enter otherField" />)}
       />

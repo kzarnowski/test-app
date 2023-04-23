@@ -3,26 +3,28 @@ import { Project } from "../types";
 import { Space, Input } from "antd";
 
 export function ProjectItems({
-  useFormData
+  useFormData,
+  prefix
 }: {
-  useFormData: UseFormReturn<Project>
+  useFormData: UseFormReturn<Project>,
+  prefix?: string
 }) {
   const {
     control,
     formState: { errors }
   } = useFormData
 
-  const projectErrors = errors.name
+  const projectErrors = errors.project?.name
 
   return (
     <Space direction="vertical" size="large" className="full-width">
       <Controller
-        name="name"
+        name={`project.name`}
         control={control}
         render={() => (<Input placeholder="Enter name" />)}
       />
       <Controller
-        name="date"
+        name={`project.date`}
         control={control}
         render={() => (<Input placeholder="Enter date" />)}
       />
