@@ -19,9 +19,9 @@ export function OtherRequestItems({
 
   return (
     <Space direction="vertical" size="large" className="full-width">
-      <DateInput control={control} name="request.date"/>
+      <DateInput control={control} name="request.date" priority={priority}/>
       <PriorityInput control={control} name="request.priority" />
-      <OtherFieldInput control={control} name="request.otherField"/>
+      <OtherFieldInput control={control} name="request.otherField" errors={errors}/>
     </Space>
   )
 }

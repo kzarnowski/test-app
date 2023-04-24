@@ -1,5 +1,5 @@
 import { Controller, Control, Path, FieldValues, FormState } from 'react-hook-form'
-import { Input } from 'antd'
+import { Input, Radio } from 'antd'
 import { AddRequest, Project } from './types';
 
 export function NameInput<T extends FieldValues>({ control, name }: { control: Control<T>; name: Path<T> }) {
@@ -12,12 +12,12 @@ export function NameInput<T extends FieldValues>({ control, name }: { control: C
   )
 }
 
-export function DateInput<T extends FieldValues>({ control, name }: { control: Control<T>; name: Path<T> }) {
+export function DateInput<T extends FieldValues>({ control, name, priority }: { control: Control<T>; name: Path<T>, priority: 'high' | 'low' }) {
   return (
     <Controller
       name={name}
       control={control}
-      render={() => (<Input placeholder="Enter date" />)}
+      render={() => (<Input placeholder={`Enter date, priority: ${priority}`} />)}
     />
   )
 }
@@ -25,10 +25,16 @@ export function DateInput<T extends FieldValues>({ control, name }: { control: C
 export function PriorityInput<T extends FieldValues>({ control, name }: { control: Control<T>; name: Path<T> }) {
   return (
     <Controller
-      name={name}
-      control={control}
-      render={() => (<Input placeholder="Enter priority" />)}
-    />
+        name={name}
+        control={control}
+        render={({ field, fieldState }) => (
+            <Radio.Group {...field}>
+              <Radio value="low">Low</Radio>
+              <Radio value="medium">Medium</Radio>
+              <Radio value="high">High</Radio>
+            </Radio.Group>
+        )}
+      />
   )
 }
 

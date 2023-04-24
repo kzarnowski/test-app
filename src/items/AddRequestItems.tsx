@@ -19,9 +19,9 @@ export function AddRequestItems({
 
   return (
     <Space direction="vertical" size="large" className="full-width">
-      <DateInput control={control} name="request.date"/>
+      <DateInput control={control} name="request.date" priority={priority}/>
       <PriorityInput control={control} name="request.priority" />
-      <AddFieldInput control={control} name="request.addField"/>
+      <AddFieldInput control={control} name="request.addField" errors={errors}/>
     </Space>
   )
 }

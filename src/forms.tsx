@@ -1,5 +1,5 @@
 import { Card, Space, Button } from 'antd'
-import { useForm, FormState, type FieldValues, type Path } from 'react-hook-form'
+import { useForm, FormState, type FieldValues, type Path, useWatch } from 'react-hook-form'
 import type { Request, AddRequest, OtherRequest, Project, AddRequestWithProject, OtherRequestWithProject } from './types';
 import { OtherRequestItems } from './items/OtherRequestItems';
 import { AddRequestItems } from './items/AddRequestItems';
@@ -26,7 +26,7 @@ export function ProjectForm() {
 
 export function AddForm() {
   const useFormData = useForm<AddRequest>()
-  const { handleSubmit } = useFormData
+  const { handleSubmit, } = useFormData
 
   return (
     <form onSubmit={handleSubmit((values) => console.log(values))}>
@@ -59,8 +59,9 @@ export function OtherForm() {
 }
 
 export function AddWithProjectForm() {
-  const useFormData = useForm<AddRequest & Project>()
-  const { handleSubmit, control } = useFormData
+  const { handleSubmit, control, formState: {errors} } = useForm<AddRequest & Project>()
+
+  const priority = useWatch({ control, name: 'request.priority' })
 
   return (
     <form onSubmit={handleSubmit((values) => console.log(values))}>
@@ -68,12 +69,13 @@ export function AddWithProjectForm() {
         <Space direction="vertical" size="large" className="full-width">
           <h3>Project Fields</h3>
           <NameInput control={control} name="project.name"/>
-          <DateInput control={control} name="project.date"/>
+          <DateInput control={control} name="project.date" priority={priority}/>
           <h3>Request Fields</h3>
-          <DateInput control={control} name="request.date"/>
+          <DateInput control={control} name="request.date" priority={priority}/>
           <PriorityInput control={control} name="request.priority" />
-          <AddFieldInput control={control} name="request.addField"/>
+          <AddFieldInput control={control} name="request.addField" errors={errors}/>
           <Button htmlType="submit" type="primary">Submit</Button>
+          <Link to='/'>Back</Link>
         </Space>
       </Card>
     </form>
@@ -83,15 +85,17 @@ export function AddWithProjectForm() {
 export function OtherWithProjectForm() {
   const { handleSubmit, control, formState: {errors} } = useForm<OtherRequestWithProject>()
 
+  const priority = useWatch({ control, name: 'request.priority' })
+
   return (
     <form onSubmit={handleSubmit((values) => console.log(values))}>
       <Card title="Create Other Request With Project">
         <Space direction="vertical" size="large" className="full-width">
           <h3>Project Fields</h3>
           <NameInput control={control} name="project.name"/>
-          <DateInput control={control} name="project.date"/>
+          <DateInput control={control} name="project.date" priority={priority}/>
           <h3>Request Fields</h3>
-          <DateInput control={control} name="request.date"/>
+          <DateInput control={control} name="request.date" priority={priority}/>
           <PriorityInput control={control} name="request.priority" />
           <OtherFieldInput control={control} name="request.otherField" errors={errors}/>
           <Link to='/'>Back</Link>
