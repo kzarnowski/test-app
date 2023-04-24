@@ -1,7 +1,7 @@
 import { UseFormReturn, Controller} from "react-hook-form";
 import { RequestWithProject, Project, AddRequest, OtherRequest } from "../types";
 import { Space, Input } from "antd";
-//import { NameInput, DateInput } from '../components/project'
+import { NameInput, DateInput } from '../components'
 
 
 export function ProjectItems({
@@ -18,16 +18,8 @@ export function ProjectItems({
 
   return (
     <Space direction="vertical" size="large" className="full-width">
-      <Controller
-        name="project.name"
-        control={control}
-        render={() => (<Input placeholder="Enter name" />)}
-      />
-      <Controller
-        name="project.date"
-        control={control}
-        render={() => (<Input placeholder="Enter date" />)}
-      />
+      <NameInput control={control} name="project.name"/>
+      <DateInput control={control} name="project.date"/>
     </Space>
   )
 }

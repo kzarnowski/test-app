@@ -5,6 +5,7 @@ import { OtherRequestItems } from './items/OtherRequestItems';
 import { AddRequestItems } from './items/AddRequestItems';
 import { ProjectItems } from './items/ProjectItems';
 import { Link } from 'react-router-dom';
+import { DateInput, NameInput, PriorityInput, AddFieldInput, OtherFieldInput } from './components';
 
 export function ProjectForm() {
   const useFormData = useForm<Project>()
@@ -58,15 +59,20 @@ export function OtherForm() {
 }
 
 export function AddWithProjectForm() {
-  const useFormData = useForm<AddRequestWithProject>()
-  const { handleSubmit } = useFormData
+  const useFormData = useForm<AddRequest & Project>()
+  const { handleSubmit, control } = useFormData
 
   return (
     <form onSubmit={handleSubmit((values) => console.log(values))}>
       <Card title="Create Add Request With Project">
         <Space direction="vertical" size="large" className="full-width">
-          <ProjectItems useFormData={useFormData}/>
-          <AddRequestItems useFormData={useFormData}/>
+          <h3>Project Fields</h3>
+          <NameInput control={control} name="project.name"/>
+          <DateInput control={control} name="project.date"/>
+          <h3>Request Fields</h3>
+          <DateInput control={control} name="request.date"/>
+          <PriorityInput control={control} name="request.priority" />
+          <AddFieldInput control={control} name="request.addField"/>
           <Button htmlType="submit" type="primary">Submit</Button>
         </Space>
       </Card>
@@ -75,16 +81,19 @@ export function AddWithProjectForm() {
 }
 
 export function OtherWithProjectForm() {
-  const useFormData = useForm<OtherRequestWithProject>()
-  const { handleSubmit } = useFormData
+  const { handleSubmit, control, formState: {errors} } = useForm<OtherRequestWithProject>()
 
   return (
     <form onSubmit={handleSubmit((values) => console.log(values))}>
       <Card title="Create Other Request With Project">
         <Space direction="vertical" size="large" className="full-width">
-          <ProjectItems useFormData={useFormData}/>
-          <OtherRequestItems useFormData={useFormData}/>
-          <Button htmlType="submit" type="primary" >Submit</Button>
+          <h3>Project Fields</h3>
+          <NameInput control={control} name="project.name"/>
+          <DateInput control={control} name="project.date"/>
+          <h3>Request Fields</h3>
+          <DateInput control={control} name="request.date"/>
+          <PriorityInput control={control} name="request.priority" />
+          <OtherFieldInput control={control} name="request.otherField" errors={errors}/>
           <Link to='/'>Back</Link>
         </Space>
       </Card>

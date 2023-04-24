@@ -1,11 +1,12 @@
 import { UseFormReturn, useWatch, Controller } from "react-hook-form";
 import { OtherRequest, Project } from "../types";
 import { Space, Input } from "antd";
+import { OtherFieldInput, PriorityInput, DateInput } from "../components";
 
 export function OtherRequestItems({
   useFormData
 }: {
-  useFormData: UseFormReturn<OtherRequest> | UseFormReturn<OtherRequest & Project>
+  useFormData: UseFormReturn<OtherRequest>
 }) {
   const {
     control,
@@ -18,21 +19,9 @@ export function OtherRequestItems({
 
   return (
     <Space direction="vertical" size="large" className="full-width">
-      <Controller
-        name="request.date"
-        control={control}
-        render={() => (<Input placeholder="Enter date" />)}
-      />
-      <Controller
-        name="request.priority"
-        control={control}
-        render={() => (<Input placeholder="Enter priority" />)}
-      />
-      <Controller
-        name="request.otherField"
-        control={control}
-        render={() => (<Input placeholder="Enter otherField" />)}
-      />
+      <DateInput control={control} name="request.date"/>
+      <PriorityInput control={control} name="request.priority" />
+      <OtherFieldInput control={control} name="request.otherField"/>
     </Space>
   )
 }
